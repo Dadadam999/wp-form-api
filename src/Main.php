@@ -2,35 +2,19 @@
 
 namespace FormApi;
 
+use FormApi\Controller\ScriptController;
 use WP_REST_Request;
 
 class Main
 {
+    private ScriptController $scriptController;
+
     public function __construct()
-    {   
-        //$this->apiInit();
-        //$this->scriptAdd();
-    }
-
-    private function scriptAdd()
     {
-        wp_enqueue_style('mufh-front', plugins_url('MultipleUploadsForHeilz/Source/Assets/Style/MufhFront.css'));
-
-        add_action('wp_enqueue_scripts', function () {
-            $scripts = [
-                'mufh-lib-nosleep' => 'Lib/NoSleep.min.js',
-                'mufh-class-menu' => 'Classes/Menu.js',
-            ];
-
-            foreach ($scripts as $label => $path) {
-                wp_enqueue_script(
-                    $label,
-                    plugins_url('MultipleUploadsForHeilz/Source/Assets/Js/' . $path),
-                    [],
-                    '1.0.0'
-                );
-            }
-        });
+        $this->scriptController  = new ScriptController(
+            'wp-form-api/asets/style',
+            'wp-form-api/asets/script',
+        );
     }
 
     private function apiInit()
