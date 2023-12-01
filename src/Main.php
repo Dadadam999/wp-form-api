@@ -2,19 +2,39 @@
 
 namespace FormApi;
 
+use FormApi\Controller\MetaBox\TestMetabox;
+use FormApi\Controller\PostController;
 use FormApi\Controller\ScriptController;
+use FormApi\Entity\Post;
 use WP_REST_Request;
 
 class Main
 {
     private ScriptController $scriptController;
+    private PostController $postController;
 
     public function __construct()
     {
-        $this->scriptController  = new ScriptController(
+        $this->scriptController = new ScriptController(
             'wp-form-api/asets/style',
             'wp-form-api/asets/script',
         );
+
+        $this->postController = new PostController();
+
+        $test = new Post(
+            'test_post',
+            'Test title',
+            'dashicons-calendar-alt',
+            'manage_options',
+            [ 'title', 'page-attributes' ]
+        );
+
+        $this->postController->registerPublicType($test);
+        $this->postController->registerMenu($test);
+        $this->postController->removeStandartMetaBoxes($test);
+        $testMetaBox = new TestMetabox($test);
+
     }
 
     private function apiInit()
