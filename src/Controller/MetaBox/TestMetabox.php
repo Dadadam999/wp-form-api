@@ -58,7 +58,7 @@ class TestMetabox extends MetaBoxController implements MetaBoxInterface
 
     public function callback($postId): void
     {
-        if (!wp_verify_nonce($_POST['test_metabox_nonce'], 'test_metabox_nonce')) {
+        if (!isset($_POST['test_metabox_nonce']) || !wp_verify_nonce($_POST['test_metabox_nonce'], 'test_metabox_nonce')) {
             return;
         }
 
