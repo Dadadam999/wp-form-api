@@ -5,23 +5,16 @@ namespace FormApi;
 use WP_REST_Request;
 use WpToolKit\Entity\Post;
 
-use WpToolKit\Controller\ScriptController;
 use FormApi\Controller\MetaBox\TestMetabox;
-use WpToolKit\Controller\BasePostController;
+use WpToolKit\Controller\PostController;
+use WpToolKit\Controller\ViewLoader;
 
 class Main
 {
-    private BasePostController $postController;
+    private PostController $postController;
 
     public function __construct()
     {
-        ScriptController::setFolders(
-            'wp-form-api/asets/style',
-            'wp-form-api/asets/script',
-        );
-
-        $this->postController = new BasePostController();
-
         $test = new Post(
             'test_post',
             'Test title',
@@ -30,9 +23,9 @@ class Main
             ['title', 'page-attributes']
         );
 
-        $this->postController->registerPublicType($test);
-        $this->postController->registerMenu($test);
-        $testMetaBox = new TestMetabox($test);
+        $this->postController = new PostController($test);
+        $this->postController->registerMenu();
+        new TestMetabox($test);
     }
 
     private function apiInit()

@@ -13,7 +13,7 @@
         'dadadam/wptoolkit' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5fa9ccea4ea46c6944db001c057adc58db7ddd71',
+            'reference' => '1d57bf8e10ac6ec637c27107a052320b280b32e8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../dadadam/wptoolkit',
             'aliases' => array(

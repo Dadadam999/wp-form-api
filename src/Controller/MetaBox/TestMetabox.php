@@ -3,27 +3,57 @@
 namespace FormApi\Controller\MetaBox;
 
 use WpToolKit\Entity\Post;
+use WpToolKit\Entity\View;
+use WpToolKit\Controller\ViewLoader;
+use WpToolKit\Field\TextField;
 use WpToolKit\Interface\MetaBoxInterface;
-use WpToolKit\Controller\BaseMetaBoxController;
+use WpToolKit\Controller\MetaBoxController;
+use WpToolKit\Entity\MetaPoly;
+use WpToolKit\Entity\MetaPolyType;
 
-class TestMetabox extends BaseMetaBoxController implements MetaBoxInterface
+class TestMetabox extends MetaBoxController implements MetaBoxInterface
 {
-    public function __construct(private Post $post)
-    {
+    private MetaPoly $something;
+
+    public function __construct(
+        private Post $post
+    ) {
         parent::__construct(
             "test_metabox",
             "Test metabox",
-            $post->getName()
+            $post->name
+        );
+
+        $this->something = new MetaPoly(
+            'something',
+            MetaPolyType::STRING,
+            'Какая-то настройка:'
         );
     }
 
     public function render($post): void
     {
-        $something = get_post_meta($post->ID, 'something', true);
+        $somethingField = new TextField(
+            $this->something->name,
+            $this->something->title,
+            get_post_meta(
+                $post->ID,
+                $this->something->name,
+                true
+            )
+        );
 
-        ob_start();
-        require WP_PLUGIN_DIR . '/wp-form-api/src/Template/TestMetaBoxView.php';
-        echo ob_get_clean();
+        $viewLoader = new ViewLoader();
+
+        $viewLoader->add(
+            new View(
+                'TestMetaBox',
+                WP_PLUGIN_DIR . '/wp-form-api/src/Template/TestMetaBoxView.php',
+                ['something' => $somethingField]
+            )
+        );
+
+        $viewLoader->load('TestMetaBox');
     }
 
     public function callback($postId): void
@@ -40,8 +70,12 @@ class TestMetabox extends BaseMetaBoxController implements MetaBoxInterface
             return;
         }
 
-        if (isset($_POST['something'])) {
-            update_post_meta($postId, 'something', sanitize_text_field($_POST['something']));
+        if (isset($_POST[$this->something->name])) {
+            update_post_meta(
+                $postId,
+                $this->something->name,
+                sanitize_text_field($_POST[$this->something->name])
+            );
         }
     }
 }
