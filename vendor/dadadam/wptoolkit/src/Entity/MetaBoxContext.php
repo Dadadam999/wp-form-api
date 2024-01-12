@@ -1,6 +1,6 @@
 <?php
 
-namespace FormApi\Entity;
+namespace WpToolKit\Entity;
 
 enum MetaBoxContext: string
 {

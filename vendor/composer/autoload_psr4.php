@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WpToolKit\\' => array($vendorDir . '/dadadam/wptoolkit/src'),
     'FormApi\\Tests\\' => array($baseDir . '/tests'),
     'FormApi\\' => array($baseDir . '/src'),
 );

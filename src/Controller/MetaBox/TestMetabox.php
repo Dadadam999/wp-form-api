@@ -2,11 +2,11 @@
 
 namespace FormApi\Controller\MetaBox;
 
-use FormApi\Controller\MetaBoxController;
-use FormApi\Entity\Post;
-use FormApi\Interface\MetaBoxInterface;
+use WpToolKit\Entity\Post;
+use WpToolKit\Interface\MetaBoxInterface;
+use WpToolKit\Controller\BaseMetaBoxController;
 
-class TestMetabox extends MetaBoxController implements MetaBoxInterface
+class TestMetabox extends BaseMetaBoxController implements MetaBoxInterface
 {
     public function __construct(private Post $post)
     {

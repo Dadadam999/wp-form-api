@@ -12,5 +12,8 @@
       "psr-4": {
         "FormApi\\Tests\\": "tests/"
       }
-    }    
-  }
+    },
+    "require": {
+        "dadadam/wptoolkit": "dev-main"
+    }
+}

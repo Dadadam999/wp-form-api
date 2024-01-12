@@ -1,6 +1,6 @@
 <?php
 
-namespace FormApi\Interface;
+namespace WpToolKit\Interface;
 
 interface MetaBoxInterface
 {

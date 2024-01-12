@@ -2,45 +2,42 @@
 
 namespace FormApi;
 
-use FormApi\Controller\MetaBox\TestMetabox;
-use FormApi\Controller\PostController;
-use FormApi\Controller\ScriptController;
-use FormApi\Entity\Post;
 use WP_REST_Request;
+use WpToolKit\Entity\Post;
+
+use WpToolKit\Controller\ScriptController;
+use FormApi\Controller\MetaBox\TestMetabox;
+use WpToolKit\Controller\BasePostController;
 
 class Main
 {
-    private ScriptController $scriptController;
-    private PostController $postController;
+    private BasePostController $postController;
 
     public function __construct()
     {
-        $this->scriptController = new ScriptController(
+        ScriptController::setFolders(
             'wp-form-api/asets/style',
             'wp-form-api/asets/script',
         );
 
-        $this->postController = new PostController();
+        $this->postController = new BasePostController();
 
         $test = new Post(
             'test_post',
             'Test title',
             'dashicons-calendar-alt',
             'manage_options',
-            [ 'title', 'page-attributes' ]
+            ['title', 'page-attributes']
         );
 
         $this->postController->registerPublicType($test);
         $this->postController->registerMenu($test);
-        $this->postController->removeStandartMetaBoxes($test);
         $testMetaBox = new TestMetabox($test);
-
     }
 
     private function apiInit()
     {
-        add_action('rest_api_init', function () 
-        {    
+        add_action('rest_api_init', function () {
             register_rest_route(
                 'MultipleUploadsForHeilz/v1',
                 '/savemetapoly',

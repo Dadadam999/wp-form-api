@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInita778ed8fc1a45ffae9cb1c5e56176df4
 {
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'WpToolKit\\' => 10,
+        ),
         'F' => 
         array (
             'FormApi\\Tests\\' => 14,
@@ -15,6 +19,10 @@ class ComposerStaticInita778ed8fc1a45ffae9cb1c5e56176df4
     );
 
     public static $prefixDirsPsr4 = array (
+        'WpToolKit\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dadadam/wptoolkit/src',
+        ),
         'FormApi\\Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',

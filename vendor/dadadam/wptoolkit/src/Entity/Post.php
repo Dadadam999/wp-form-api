@@ -1,6 +1,6 @@
 <?php
 
-namespace FormApi\Entity;
+namespace WpToolKit\Entity;
 
 class Post
 {
@@ -14,7 +14,7 @@ class Post
          * @var string[]
          */
         private array $supports,
-        
+
         private int $position = 0
     ) {
     }
@@ -81,6 +81,6 @@ class Post
 
     public function getUrl(): string
     {
-       return '/edit.php?post_type=' . $this->name; 
+        return '/edit.php?post_type=' . $this->name;
     }
 }
