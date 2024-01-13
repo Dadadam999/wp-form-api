@@ -7,7 +7,6 @@ use WpToolKit\Entity\Post;
 
 use FormApi\Controller\MetaBox\TestMetabox;
 use WpToolKit\Controller\PostController;
-use WpToolKit\Controller\ViewLoader;
 
 class Main
 {
@@ -24,7 +23,7 @@ class Main
         );
 
         $this->postController = new PostController($test);
-        $this->postController->registerMenu();
+        $this->postController->addToMenu();
         new TestMetabox($test);
     }
 
