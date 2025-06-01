@@ -2,7 +2,6 @@
     "name": "wordpress/wpformapi",
     "type": "wordpress-plugin",
     "license": "GPL-2.0",
-    "version": "0.0.1",
     "autoload": {
       "psr-4": {
         "FormApi\\": "src/"
@@ -14,6 +13,6 @@
       }
     },
     "require": {
-        "arraydev/wptoolkit": "v1.1.4-beta"
+        "arraydev/wptoolkit": "v1.1.8-beta"
     }
 }
